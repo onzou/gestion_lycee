@@ -1,0 +1,107 @@
+<div class="conteneur">
+    <div class="single-container" *ngIf="student">
+    
+        <nz-card style="width: 100%" nzTitle="{{student.prenom + ' ' + student.nom}}"  [nzActions]="[actionEdit, actionDelete, actionTransfer]">
+              <nz-tabset nzSize="large"  >
+                <nz-tab nzTitle="Identifiants" style="width: 80%;">
+                    <nz-descriptions class="description" >
+                        <nz-descriptions-item nzTitle="Prenom">
+                                <input nz-input type="text" [disabled]="wannaModifyCredentials" id="prenom"  [(ngModel)]="student.prenom"/>
+                        </nz-descriptions-item>
+    
+                        <nz-descriptions-item nzTitle="Nom">
+                                <input nz-input type="text" [disabled]="wannaModifyCredentials" id="nom"  [(ngModel)]="student.nom"/>
+                        </nz-descriptions-item>
+    
+                        <nz-descriptions-item nzTitle="Sexe">
+                                <input nz-input type="text" [disabled]="wannaModifyCredentials" id="sexe"  [(ngModel)]="student.sexe"/>
+                        </nz-descriptions-item>
+    
+                        <nz-descriptions-item nzTitle="Adresse">
+                                <input nz-input type="text" [disabled]="wannaModifyCredentials" id="adresse"  [(ngModel)]="student.adresse"/>
+                        </nz-descriptions-item>
+    
+                        <nz-descriptions-item nzTitle="Telephone">
+                                <input nz-input type="text" [disabled]="wannaModifyCredentials" id="telephone"  [(ngModel)]="student.telephone"/>
+                        </nz-descriptions-item>
+    
+                        <nz-descriptions-item nzTitle="Classe">
+                                <input nz-input type="text" [disabled]="wannaModifyCredentials" id="classe"  [(ngModel)]="student.classe"/>
+                        </nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Date de naissance">   
+                            <p *ngIf="wannaModifyCredentials">{{student.dateNaissance.toDate() | date: 'dd/MM/yyyy'}}</p>                         
+                            <nz-date-picker *ngIf="!wannaModifyCredentials" [nzDisabled]="wannaModifyCredentials" [nzFormat]="dateFormat"  ></nz-date-picker>                    
+                        </nz-descriptions-item>
+                        
+                        <nz-descriptions-item nzTitle="Lieu de naissance">                           
+                             <input nz-input type="text" [disabled]="wannaModifyCredentials" id="lieuNaissance"  [(ngModel)]="student.lieuNaissance"/>
+                        </nz-descriptions-item>
+    
+                        <nz-descriptions-item nzTitle="Matricule">
+                                <input nz-input type="text" [disabled]="wannaModifyCredentials" id="matricule"  [(ngModel)]="student.matricule"/>
+                        </nz-descriptions-item>
+    
+                        <nz-descriptions-item nzTitle="Classe redoublée" >
+                                <input  nz-input type="text" [disabled]="wannaModifyCredentials" id="redoubles"  [(ngModel)]="student.redoubles"/>
+                        </nz-descriptions-item> 
+                      </nz-descriptions>               
+                </nz-tab>
+                <nz-tab nzTitle="Notes" class="mesNotes">
+                    <table style="margin-top: 0px">
+                        <thead>
+                            <tr>
+                                <th>Matiere</th>
+                                <th>Devoir</th>
+                                <th>Composition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of notes">
+                                <td >{{item.matiere}}</td> 
+                                <td>
+                                    <nz-input-number class="monInput" [nzDisabled]="wannaModifyCredentials" [nzMin]="0" [nzMax]="20" [(ngModel)]="item.noteDevoir" ></nz-input-number>
+                                </td>
+                                <td>
+                                    <nz-input-number class="monInput" [nzDisabled]="wannaModifyCredentials" [nzMin]="0" [nzMax]="20" [(ngModel)]="item.noteCompo" ></nz-input-number> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </nz-tab>
+              </nz-tabset>
+          </nz-card>
+          <ng-template #actionEdit>
+            <i (click)="modifyAndUpdateCredentials()" style="font-size: 23px;" *ngIf="wannaModifyCredentials" nz-icon nzType="edit" title="Modifier"></i>
+            <i (click)="modifyAndUpdateCredentials()" style="font-size: 23px;" nz-icon nzType="check" *ngIf="!wannaModifyCredentials" nzTheme="outline" title="Valider"></i>
+          </ng-template>
+          <ng-template #actionDelete>
+            <i (click)="showDeleteConfirm()" style="font-size: 23px;" nz-icon nzType="delete" nzTheme="outline" title="Supprimer"></i>
+          </ng-template>
+          <ng-template #actionTransfer>
+            <i style="font-size: 23px;" (click)="showModal()" nz-icon nzType="export" nzTheme="outline" title="Vers une autre classe"></i>
+          </ng-template>
+    
+          <nz-modal [(nzVisible)]="isTransferModalVisible" nzTitle="Custom Modal Title" (nzOnCancel)="handleCancel()">
+            <form #formTransfer="ngForm">
+                <div *nzModalContent>
+                    <nz-form-item >
+                        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="classe" nzRequired>Classe cible</nz-form-label>
+                            <nz-form-control nzErrorTip="Entrez la classe">
+                                <nz-select #nomClasseDestination="ngModel" name="nomClasseDestination" ngModel  class="phone-select" *ngIf="otherClasses" >
+                                <div *ngFor="let classe of otherClasses" >
+                                    <nz-option nzLabel="{{classe.nom}}" nzValue="{{classe.nom}}"></nz-option>
+                                </div>
+                                </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>        
+                </div>
+                <div *nzModalFooter>
+                <button nz-button nzType="default" (click)="handleCancel()">Annuler</button>
+                <button nz-button nzType="primary" (click)="handleOk(formTransfer.value)" [nzLoading]="isConfirmLoading">Valider</button>
+                </div>
+            </form>
+    
+          </nz-modal>
+          
+    </div>
+</div>

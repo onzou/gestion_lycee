@@ -1,0 +1,180 @@
+.monInput {
+    margin-left: 5px;
+    border: none;
+    background: none;
+    border: 1px solid black;
+}
+
+
+.container th h1 {
+    font-weight: bold;
+    font-size: 1em;
+    text-align: left;
+}
+
+.container thead tr th {
+    border: 1px solid black;
+    padding: 12px;
+}
+
+.container thead tr th h1 {
+    text-align: center;
+    color: black;
+}
+
+.container td {
+    border: 1px solid black;
+    text-align: center;
+    font-size: 18px;
+}
+
+.container td {
+    padding: 7px;
+}
+
+.container tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.container tbody tr:nth-child(even) {
+    background-color: rgb(214, 210, 210);
+}
+
+
+.container td:first-child {
+    color: #000000;
+}
+
+
+@media (max-width: 800px) {
+
+    .container td:nth-child(4),
+    .container th:nth-child(4) {
+        display: none;
+    }
+}
+
+tfoot th {
+    font-size: 20px;
+    text-align: center;
+}
+
+#somMoy {
+    border: 1px solid black;
+}
+
+#pied,
+.total {
+    border: 1px solid black;
+}
+
+.addBtn {
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background: #2196F3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.25s ease;
+}
+
+.addBtn:hover {
+    transform: scale(1.1);
+    background: white;
+    border: 1px solid #2196F3;
+}
+
+
+.addBtn:hover .icon-bulletin {
+    color: #2196F3;
+}
+
+.line1 {
+    transform: rotate(90deg) translateY(-350%);
+}
+
+.line2 {
+    transform: translateX(-50%);
+}
+
+::ng-deep .vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .vertical-center-modal .ant-modal {
+    top: 0;
+}
+
+::ng-deep .vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .vertical-center-modal .ant-modal {
+    top: 0;
+}
+
+.unBulletin {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.credentials {
+    display: grid;
+    grid-template-areas: "lycee . semestre"
+        "nom . redoubles"
+        ". bulletin .";
+}
+
+#lycee {
+    grid-area: lycee;
+    font-size: 18px;
+}
+
+#nom {
+    grid-area: nom;
+    font-size: 16px;
+}
+
+#semestre {
+    grid-area: semestre;
+}
+
+#redoubles {
+    grid-area: redoubles;
+}
+
+#bulletinTexte {
+    grid-area: bulletin;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.unBulletin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-bulletin {
+    font-size: 25px;
+    color: white;
+}
+
+.conteneur {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

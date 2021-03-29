@@ -1,0 +1,115 @@
+<div style="width: 100%;" class="conteneur">
+  <nz-card *ngIf="classe" style="width: 100%;margin-top: 16px" >
+    <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
+      <nz-card-meta  nzTitle="{{classe.nom}}" [nzDescription]="monTemplate"></nz-card-meta>
+    </nz-skeleton>
+  </nz-card>
+  
+  <ng-template #monTemplate >
+      <p>Effectif: {{classe.eleves.length}}</p>
+      <nz-table #basicTable *ngIf="students" [nzData]="students" style="width: 100%;" class="maTable">
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th>Sexe</th>
+              <th>Adresse</th>
+              <th>Date de naissance</th>
+              <th>Lieu de naissance</th>
+              <th>Matricule</th>
+              <th>Téléphone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data" [routerLink]="['/students/details',data.id, data.classe]">
+              <td>{{ data.prenom }}</td>
+              <td>{{ data.nom }}</td>
+              <td>{{ data.sexe }}</td>
+              <td>{{ data.adresse }}</td>
+              <td>{{ data.dateNaissance.toDate() | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ data.lieuNaissance }}</td>
+              <td>{{ data.matricule }}</td>
+              <td>{{ data.telephone }}</td>
+            </tr>
+          </tbody>
+        </nz-table> 
+  </ng-template>
+  <div class="addBtn" title="Générer les bulletins de notes" (click)="showModalTop()" > <!-- "mesBulletinsNote()"-->
+    <i nz-icon nzType="dot-chart" class="icon-bulletin" nzTheme="outline"></i>
+  </div>
+  
+  <nz-modal
+        [nzStyle]="{ top: '20px' }"
+        [(nzVisible)]="isVisibleTop"
+        [nzWidth]="1200"
+        (nzOnCancel)="handleCancelTop()"
+        nzTitle="Bulletins de note"
+        [nzFooter]="modalFooter"
+      >
+        <ng-container *nzModalContent>
+          <div class="unBulletin" *ngFor="let reportCard of reportCards" >
+            <nz-card style="width:100%;margin-bottom: 30px;">
+              <div class="credentials">
+                <div id="lycee">
+                  <span>Lycée de Pout</span>
+                </div>
+                <div id="nom">
+                  <p>Nom: {{reportCard.prenom}} {{reportCard.nom}} </p>
+                </div>
+                <div id="semestre">
+                  <p>Semestre: 1</p>
+                </div>
+                <div id="redoubles">
+                  <p>Classe redoublés: {{reportCard.redoubles}}</p>
+                </div>
+                <div id="bulletinTexte">
+                  <p>Bulletin de notes</p>
+                </div>
+              </div>
+              <table class="container">
+                <thead>
+                  <tr>
+                    <th><h1>Matieres</h1></th>
+                    <th><h1>Devoir</h1></th>
+                    <th><h1>Composition</h1></th>
+                    <th><h1>Coeff</h1></th>
+                    <th><h1>Moyenne</h1></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let note of reportCard.notes">
+                    <td>{{note.matiere}}</td>
+                    <td>{{note.noteDevoir}}</td>
+                    <td>{{note.noteCompo}}</td>
+                    <td>{{note.coeff}}</td>
+                    <td>{{((note.noteCompo + note.noteDevoir)/2)* note.coeff}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr id="somMoy">
+                    <th class="total">Total</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="total"> {{reportCard.totalMoy}} </th>
+                  </tr>
+                  <tr id="pied">
+                    <th>Moyenne: {{reportCard.moy | number: '2.1-2'}}</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Rang: {{reportCard.rang + 1}}</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </nz-card>            
+        </div>
+        </ng-container>
+        <ng-template #modalFooter>
+          <button nz-button nzType="default" (click)="handleCancelTop()">Quitter</button>
+          <button nz-button nzType="primary" (click)="imprimerBulletins()" [nzLoading]="isLoadingOne">
+            <i nz-icon nzType="printer" nzTheme="outline"></i>Imprimer
+          </button>
+        </ng-template>
+  </nz-modal>
+</div>

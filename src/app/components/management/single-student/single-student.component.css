@@ -1,0 +1,30 @@
+[nz-form] {
+    max-width: 600px;
+}
+
+input:disabled,
+p {
+    background: none;
+    border: none;
+}
+
+.monInput:not(:disabled) {
+    background: white;
+    color: black;
+}
+
+thead tr td {
+    text-align: center;
+}
+
+.conteneur {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mesNotes {
+    width: 100vw;
+}

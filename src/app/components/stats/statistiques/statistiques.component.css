@@ -1,0 +1,43 @@
+.loadingIcon {
+    height: 100vh;
+    width: 100%;
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 450px;
+}
+
+.charts {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nombreEleve {}
+
+.eleves {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 33, 64, 0.50);
+    box-shadow: 0 8px 7px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.monIcon {
+    margin-top: -100px;
+}
+
+.data {
+    background-color: white;
+}
+
+.nombre {
+    font-weight: bold;
+}

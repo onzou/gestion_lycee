@@ -1,0 +1,30 @@
+<div class="data" *ngIf="isDataReady">
+    <div style="color: black;" class="eleves">
+        <span>Nombre d'élèves: <span class="nombre">{{students.length}}</span></span>
+    </div>
+    <div class="charts">
+        <div style="display: block;">
+            <canvas mdbChart
+                [chartType]="chartType"
+                [datasets]="chartDatasets"
+                [labels]="chartLabels"
+                [colors]="chartColors"
+                [options]="chartOptions"
+                [legend]="true"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
+        </div>
+        <div id="chart">
+            <apx-chart
+                [series]="chartOptions2.series"
+                [chart]="chartOptions2.chart"
+                [plotOptions]="chartOptions2.plotOptions"
+                [labels]="chartOptions2.labels"
+            ></apx-chart>
+        </div>
+    </div>
+</div>
+<div *ngIf="!isDataReady" class="loadingIcon" >
+    <i nz-icon [nzType]="'loading'" ></i>
+</div>

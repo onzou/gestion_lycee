@@ -1,0 +1,38 @@
+.logo {
+    height: 42px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+}
+
+li {
+    font-size: 20px;
+    outline: none;
+}
+
+.liste {
+    display: flex;
+    align-items: center;
+}
+
+.listeParticular {
+    margin-top: -38px;
+    margin-left: 25px;
+
+}
+
+.mesListes {
+    margin-left: -25px;
+}
+
+.autreListes {
+    margin-left: 25px;
+
+}
+
+i {
+    font-size: 20px;
+}

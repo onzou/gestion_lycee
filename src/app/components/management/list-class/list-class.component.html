@@ -1,0 +1,38 @@
+<div class="conteneur">
+    <div class="addBtn" title="Ajouter une classe" (click)="showModalMiddle()" >
+      <span class="line1 line"></span>
+      <span class="line2 line"></span>
+    </div>
+    <nz-table #basicTable [nzData]="classes" style="width: 80%;" *ngIf="classes" class="maTable">
+      <thead>
+        <tr>
+          <th>Classe</th>
+          <th>Effectif</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data" [routerLink]="['/classes/details',data.id, data.nom]" >
+          <td>{{ data.nom }}</td>
+          <td>{{ data.eleves.length }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+
+    <nz-modal
+      nzWrapClassName="vertical-center-modal"
+      [(nzVisible)]="isVisibleMiddle"
+      nzTitle="Création d'une classe"
+      (nzOnCancel)="handleCancelMiddle()"
+      (nzOnOk)="handleOkMiddle()"
+    >
+      <ng-container *nzModalContent>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nom" nzRequired>Nom de la classe</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Le nom est requis">
+            <input nz-input type="text" name="nom" id="nom" [(ngModel)]="nouvelleClasse.nom" />
+          </nz-form-control>
+        </nz-form-item>
+      </ng-container>
+      
+    </nz-modal>
+</div>

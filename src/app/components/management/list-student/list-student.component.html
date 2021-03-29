@@ -1,0 +1,28 @@
+<div class="conteneur">
+  <nz-table #basicTable [nzData]="students" class="maTable">
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Sexe</th>
+        <th>Adresse</th>
+        <th>Date de naissance</th>
+        <th>Lieu de naissance</th>
+        <th>Matricule</th>
+        <th>Téléphone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data" [routerLink]="['/students/details',data.id, data.classe]">
+        <td>{{ data.prenom }}</td>
+        <td>{{ data.nom }}</td>
+        <td>{{ data.sexe }}</td>
+        <td>{{ data.adresse }}</td>
+        <td>{{ data.dateNaissance.toDate() | date: 'dd/MM/yyyy' }}</td> <!---->
+        <td>{{ data.lieuNaissance }}</td>
+        <td>{{ data.matricule }}</td>
+        <td>{{ data.telephone }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

@@ -1,0 +1,25 @@
+<div class="conteneur">
+    <form class="form" #form="ngForm" (ngSubmit)="login(form.value)">
+      <legend style="text-align: center;">Connexion</legend>
+      <p *ngIf="errorMessage" class="text text-danger" >{{errorMessage}}</p>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Adresse email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez adresse email"
+                required 
+                #email="ngModel"
+                name="email"
+                [class.is-invalid]='email.touched && !email.valid'
+                ngModel>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Mot de passe</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe"
+                required 
+                name="password"
+                #password="ngModel"
+                [class.is-invalid]='password.touched && !password.valid'
+                ngModel>
+        </div>
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Valider</button>
+      </form>
+</div>

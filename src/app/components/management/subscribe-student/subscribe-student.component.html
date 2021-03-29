@@ -1,0 +1,101 @@
+<div class="conteneur">
+  <legend style="margin-left: 20px; text-decoration: underline;">Inscription</legend>
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="myForm">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="prenom">Prénom</nz-form-label>
+      <nz-form-control [nzSm]="6" [nzXs]="0" nzErrorTip="Le prénom est requis">
+        <input nz-input formControlName="prenom" id="prenom" />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nom" nzRequired>Nom</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="0" nzErrorTip="Le nom est requis">
+        <input nz-input type="text" id="nom" formControlName="nom"/>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item >
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sexe" nzRequired>Sexe</nz-form-label>
+      <nz-form-control
+        
+        nzErrorTip="Entrez le sexe de l'élève ">
+            <nz-select formControlName="sexe" class="phone-select" >
+                <nz-option nzLabel="M" nzValue="M">M</nz-option>
+                <nz-option nzLabel="F" nzValue="F">F</nz-option>
+            </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  
+  
+  
+    <nz-form-item >
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="classe" nzRequired>Classe</nz-form-label>
+      <nz-form-control
+        
+        nzErrorTip="Entrez la classe">
+            <nz-select formControlName="classe" class="phone-select" *ngIf="classes" >
+              <div *ngFor="let classe of classes" >
+                <nz-option nzLabel="{{classe.nom}}" nzValue="{{classe.nom}}">Bonjour</nz-option>
+              </div>
+            </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="adresse" nzRequired>Adresse</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="0" nzErrorTip="L'adresse est requise">
+        <input nz-input type="text" formControlName="adresse" id="adresse" />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="matricule" nzRequired>Matricule</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="0" nzErrorTip="Une matricule est requise">
+        <input nz-input type="text" formControlName="matricule" id="matricule" />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lieu" nzRequired>Lieu de naissance</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="0" nzErrorTip="Le lieu de naissance est requis">
+        <input nz-input type="text" formControlName="lieuNaissance" id="lieuNaissance" />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Date de naissance</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="0">
+        <nz-date-picker [nzFormat]="dateFormat" formControlName="dateNaissance"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="telephone" nzRequired>Téléphone</nz-form-label>
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="0"
+        [nzValidateStatus]="validateForm.controls['telephone']"
+        nzErrorTip="Entrez le numéro de téléphone">
+      <input formControlName="telephone" id="'telephone'" nz-input />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Classe redoublée</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="0" nzErrorTip="Entrez le nombre de classe redoublée">
+        <nz-input-number  [nzMin]="0" [nzMax]="2" [nzStep]="1" id="redoubles" formControlName="redoubles" placeholder="redoubles"></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary" >Enregistrer</button>
+      </nz-form-control>
+    </nz-form-item>
+  
+  </form>
+  
+</div>
+
+
